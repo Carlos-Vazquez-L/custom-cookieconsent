@@ -174,6 +174,7 @@ export const createConsentModal = (api, createMainContainer) => {
 
     if (acceptAllBtnData) {
         if (!dom._cmAcceptAllBtn) {
+            console.log('createConsentModal -> acceptAllBtnData', acceptAllBtnData);
             dom._cmAcceptAllBtn = createNode(BUTTON_TAG);
             appendChild(dom._cmAcceptAllBtn, createFocusSpan());
             addClassCm(dom._cmAcceptAllBtn, 'btn');
