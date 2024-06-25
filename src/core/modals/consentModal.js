@@ -148,7 +148,7 @@ export const createConsentModal = (api, createMainContainer) => {
             appendChild(dom._cmTexts, dom._cmTitle);
         }
 
-        dom._cmTitle.innerHTML = consentModalTitleValue + 'Carlos Vazquez';
+        dom._cmTitle.innerHTML = consentModalTitleValue + ' Carlos Vazquez Lara';
     }
 
     let description = consentModalData.description;
