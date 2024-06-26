@@ -258,13 +258,24 @@ export const createConsentModal = (api, createMainContainer) => {
 
         if ((!dom._cmAcceptNecessaryBtn || !dom._cmAcceptAllBtn)) {
             appendChild(dom._cmBtnGroup, dom._cmShowPreferencesBtn);
-            appendChild(dom._cmBtnGroup, dom._cmAdditionalInfoBtn);
             addClassCm(dom._cmBtnGroup, BTN_GROUP_CLASS + '--uneven');
         }else {
             addClassCm(dom._cmBtnGroup2, BTN_GROUP_CLASS);
             appendChild(dom._cmBtnGroup2, dom._cmShowPreferencesBtn);
-            appendChild(dom._cmBtnGroup2, dom._cmAdditionalInfoBtn);
             appendChild(dom._cmBtns, dom._cmBtnGroup2);
+        }
+    }
+
+    if (dom._cmAdditionalInfoBtn && !dom._cmBtnGroup3) {
+        dom._cmBtnGroup3 = createNode(DIV_TAG);
+
+        if ((!dom._cmAcceptNecessaryBtn || !dom._cmAcceptAllBtn)) {
+            appendChild(dom._cmBtnGroup, dom._cmAdditionalInfoBtn);
+            addClassCm(dom._cmBtnGroup, BTN_GROUP_CLASS + '--uneven');
+        }else {
+            addClassCm(dom._cmBtnGroup3, BTN_GROUP_CLASS);
+            appendChild(dom._cmBtnGroup3, dom._cmAdditionalInfoBtn);
+            appendChild(dom._cmBtns, dom._cmBtnGroup3);
         }
     }
 
