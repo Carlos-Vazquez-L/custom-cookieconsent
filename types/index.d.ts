@@ -297,6 +297,7 @@ declare namespace CookieConsent {
         acceptAllBtn?: string
         acceptNecessaryBtn?: string
         showPreferencesBtn?: string
+        additionalInfoBtn?: string
 
         /**
          * Specify to generate a big "X" (accept necessary) button. Visible in the `box` layout only.

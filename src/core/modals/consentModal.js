@@ -65,6 +65,7 @@ export const createConsentModal = (api, createMainContainer) => {
     const acceptAllBtnData = consentModalData.acceptAllBtn,
         acceptNecessaryBtnData = consentModalData.acceptNecessaryBtn,
         showPreferencesBtnData = consentModalData.showPreferencesBtn,
+        additionalInfoBtnData = consentModalData.additionalInfoBtn,
         closeIconLabelData = consentModalData.closeIconLabel,
         footerData = consentModalData.footer,
         consentModalLabelValue = consentModalData.label,
@@ -223,6 +224,24 @@ export const createConsentModal = (api, createMainContainer) => {
         dom._cmShowPreferencesBtn.firstElementChild.innerHTML = showPreferencesBtnData;
     }
 
+    if (additionalInfoBtnData) {
+        if (!dom._cmAdditionalInfoBtn) {
+            dom._cmAdditionalInfoBtn = createNode(BUTTON_TAG);
+            appendChild(dom._cmAdditionalInfoBtn, createFocusSpan());
+            addClassCm(dom._cmAdditionalInfoBtn, 'btn');
+            addClassCm(dom._cmAdditionalInfoBtn, 'btn--secondary');
+            setAttribute(dom._cmAdditionalInfoBtn, DATA_ROLE, 'show');
+
+            // addEvent(dom._cmAdditionalInfoBtn, 'mouseenter', () => {
+            //     if (!state._preferencesModalExists)
+            //         createPreferencesModal(api, createMainContainer);
+            // });
+            // addEvent(dom._cmAdditionalInfoBtn, CLICK_EVENT, showPreferences);
+        }
+
+        dom._cmAdditionalInfoBtn.firstElementChild.innerHTML = additionalInfoBtnData;
+    }
+
     if (!dom._cmBtnGroup) {
         dom._cmBtnGroup = createNode(DIV_TAG);
         addClassCm(dom._cmBtnGroup, BTN_GROUP_CLASS);
@@ -239,10 +258,12 @@ export const createConsentModal = (api, createMainContainer) => {
 
         if ((!dom._cmAcceptNecessaryBtn || !dom._cmAcceptAllBtn)) {
             appendChild(dom._cmBtnGroup, dom._cmShowPreferencesBtn);
+            appendChild(dom._cmBtns, dom._cmAdditionalInfoBtn);
             addClassCm(dom._cmBtnGroup, BTN_GROUP_CLASS + '--uneven');
         }else {
             addClassCm(dom._cmBtnGroup2, BTN_GROUP_CLASS);
             appendChild(dom._cmBtnGroup2, dom._cmShowPreferencesBtn);
+            appendChild(dom._cmBtnGroup2, dom._cmAdditionalInfoBtn);
             appendChild(dom._cmBtns, dom._cmBtnGroup2);
         }
     }
