@@ -232,11 +232,12 @@ export const createConsentModal = (api, createMainContainer) => {
             addClassCm(dom._cmAdditionalInfoBtn, 'btn--secondary');
             setAttribute(dom._cmAdditionalInfoBtn, DATA_ROLE, 'show');
 
-            // addEvent(dom._cmAdditionalInfoBtn, 'mouseenter', () => {
-            //     if (!state._preferencesModalExists)
-            //         createPreferencesModal(api, createMainContainer);
-            // });
-            // addEvent(dom._cmAdditionalInfoBtn, CLICK_EVENT, showPreferences);
+            // Now we are using the same function as for the showPreferences button
+            addEvent(dom._cmAdditionalInfoBtn, 'mouseenter', () => {
+                if (!state._preferencesModalExists)
+                    createPreferencesModal(api, createMainContainer);
+            });
+            addEvent(dom._cmAdditionalInfoBtn, CLICK_EVENT, showPreferences);
         }
 
         dom._cmAdditionalInfoBtn.firstElementChild.innerHTML = additionalInfoBtnData;
