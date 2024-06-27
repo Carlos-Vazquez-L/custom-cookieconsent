@@ -63,7 +63,7 @@ export const createAdditionalInfoModal = (api, createMainContainer) => {
         return;
 
     const
-        titleData = modalData.title + ' new modal 2',
+        titleData = modalData.title,
         closeIconLabelData = modalData.closeIconLabel,
         acceptAllBtnData = modalData.acceptAllBtn,
         acceptNecessaryBtnData = modalData.acceptNecessaryBtn,
@@ -86,7 +86,7 @@ export const createAdditionalInfoModal = (api, createMainContainer) => {
          */
         addEvent(pmOverlay, CLICK_EVENT, hideAdditionalInfo);
 
-        // Preferences modal
+        // Additional Info modal
         dom._pm = createNode(DIV_TAG);
 
         addClass(dom._pm, 'pm');
@@ -95,7 +95,7 @@ export const createAdditionalInfoModal = (api, createMainContainer) => {
         setAttribute(dom._pm, 'aria-modal', true);
         setAttribute(dom._pm, 'aria-labelledby', 'pm__title');
 
-        // Hide preferences on 'esc' key press
+        // Hide additional info on 'esc' key press
         addEvent(dom._htmlDom, 'keydown', (event) => {
             if (event.keyCode === 27)
                 hideAdditionalInfo();
@@ -420,7 +420,7 @@ export const createAdditionalInfoModal = (api, createMainContainer) => {
 
     });
 
-    if (acceptAllBtnData) {
+    if (acceptAllBtnData && acceptAllBtnData !== '') {
         if (!dom._pmAcceptAllBtn) {
             dom._pmAcceptAllBtn = createNode(BUTTON_TAG);
             addClassPm(dom._pmAcceptAllBtn, 'btn');
@@ -434,7 +434,7 @@ export const createAdditionalInfoModal = (api, createMainContainer) => {
         dom._pmAcceptAllBtn.innerHTML = acceptAllBtnData;
     }
 
-    if (acceptNecessaryBtnData) {
+    if (acceptNecessaryBtnData && acceptNecessaryBtnData !== '') {
         if (!dom._pmAcceptNecessaryBtn) {
             dom._pmAcceptNecessaryBtn = createNode(BUTTON_TAG);
             addClassPm(dom._pmAcceptNecessaryBtn, 'btn');
@@ -448,7 +448,7 @@ export const createAdditionalInfoModal = (api, createMainContainer) => {
         dom._pmAcceptNecessaryBtn.innerHTML = acceptNecessaryBtnData;
     }
 
-    if (savePreferencesBtnData) {
+    if (savePreferencesBtnData && savePreferencesBtnData !== '') {
         if (!dom._pmSavePreferencesBtn) {
             dom._pmSavePreferencesBtn = createNode(BUTTON_TAG);
             addClassPm(dom._pmSavePreferencesBtn, 'btn');

@@ -380,6 +380,7 @@ declare namespace CookieConsent {
     interface Translation {
         consentModal: ConsentModalOptions
         preferencesModal: PreferencesModalOptions
+        additionalInfoModal: AdditionalInfoModalOptions
     }
 
     interface CookieConsentConfig {
