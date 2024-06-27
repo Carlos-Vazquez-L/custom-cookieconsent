@@ -55,15 +55,15 @@ export const createAdditionalInfoModal = (api, createMainContainer) => {
     };
 
     /**
-     * @type {import("../global").PreferencesModalOptions}
+     * @type {import("../global").AdditionalInfoModalOptions}
      */
-    const modalData = state._currentTranslation && state._currentTranslation.preferencesModal;
+    const modalData = state._currentTranslation && state._currentTranslation.additionalInfoModal;
 
     if (!modalData)
         return;
 
     const
-        titleData = modalData.title + ' new modal',
+        titleData = modalData.title + ' new modal 2',
         closeIconLabelData = modalData.closeIconLabel,
         acceptAllBtnData = modalData.acceptAllBtn,
         acceptNecessaryBtnData = modalData.acceptNecessaryBtn,

@@ -15,6 +15,7 @@ import { COOKIE_NAME, OPT_IN_MODE } from '../utils/constants';
  * @typedef {CookieConsent.Translation} Translation
  * @typedef {CookieConsent.ConsentModalOptions} ConsentModalOptions
  * @typedef {CookieConsent.PreferencesModalOptions} PreferencesModalOptions
+ * @typedef {CookieConsent.AdditionalInfoModalOptions} AdditionalInfoModalOptions
  * @typedef {CookieConsent.CookieTable} CookieTable
  * @typedef {CookieConsent.Section} Section
  * @typedef {CookieConsent.CookieValue} CookieValue

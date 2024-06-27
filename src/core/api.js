@@ -360,6 +360,34 @@ const discardUnsavedPreferences = () => {
     }
 };
 
+const discardUnsavedAdditionalInfo = () => {
+    const consentIsValid = validConsent();
+    const allDefinedCategories = globalObj._state._allDefinedCategories;
+    const categoryInputs = globalObj._dom._categoryCheckboxInputs;
+    const serviceInputs = globalObj._dom._serviceCheckboxInputs;
+
+    /**
+     * @param {string} category
+     */
+    const categoryEnabledByDefault = (category) => elContains(globalObj._state._defaultEnabledCategories, category);
+
+    for (const category in categoryInputs) {
+        const isReadOnly = !!allDefinedCategories[category].readOnly;
+
+        categoryInputs[category].checked = isReadOnly || (consentIsValid
+            ? acceptedCategory(category)
+            : categoryEnabledByDefault(category)
+        );
+
+        for (const service in serviceInputs[category]) {
+            serviceInputs[category][service].checked = isReadOnly || (consentIsValid
+                ? acceptedService(service, category)
+                : categoryEnabledByDefault(category)
+            );
+        }
+    }
+};
+
 /**
  * Hide preferences modal
  */
@@ -411,7 +439,7 @@ export const hideAdditionalInfo = () => {
 
     state._additionalInfoModalVisible = false;
 
-    discardUnsavedPreferences();
+    discardUnsavedAdditionalInfo();
 
     /**
      * Fix focus restoration to body with Chrome
