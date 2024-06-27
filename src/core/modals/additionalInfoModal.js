@@ -144,7 +144,7 @@ export const createAdditionalInfoModal = (api, createMainContainer) => {
         appendChild(dom._pm, dom._pmHeader);
         appendChild(dom._pm, dom._pmBody);
 
-        createFooter && appendChild(dom._pm, dom._pmFooter);
+        // createFooter && appendChild(dom._pm, dom._pmFooter);
 
         appendChild(dom._pmContainer, dom._pm);
     } else {
