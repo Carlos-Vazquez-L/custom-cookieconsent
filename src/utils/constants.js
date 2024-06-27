@@ -5,6 +5,7 @@ export const OPT_OUT_MODE = 'opt-out';
 
 export const TOGGLE_CONSENT_MODAL_CLASS = 'show--consent';
 export const TOGGLE_PREFERENCES_MODAL_CLASS = 'show--preferences';
+export const TOGGLE_ADDITIONAL_INFO_MODAL_CLASS = 'show--additional-info';
 export const TOGGLE_DISABLE_INTERACTION_CLASS = 'disable--interaction';
 
 export const SCRIPT_TAG_SELECTOR = 'data-category';

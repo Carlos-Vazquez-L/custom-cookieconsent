@@ -70,7 +70,8 @@ import {
     CONSENT_MODAL_NAME,
     ARIA_HIDDEN,
     PREFERENCES_MODAL_NAME,
-    ADDITIONAL_INFO_MODAL_NAME
+    ADDITIONAL_INFO_MODAL_NAME,
+    TOGGLE_ADDITIONAL_INFO_MODAL_CLASS
 } from '../utils/constants';
 import { localStorageManager } from '../utils/localstorage';
 
@@ -313,7 +314,7 @@ export const showAdditionalInformation = () => {
 
     focusAfterTransition(globalObj._dom._pm, 2);
 
-    addClass(globalObj._dom._htmlDom, TOGGLE_PREFERENCES_MODAL_CLASS);
+    addClass(globalObj._dom._htmlDom, TOGGLE_ADDITIONAL_INFO_MODAL_CLASS);
     setAttribute(globalObj._dom._pm, ARIA_HIDDEN, 'false');
 
     /**
@@ -399,11 +400,53 @@ export const hidePreferences = () => {
     fireEvent(globalObj._customEvents._onModalHide, PREFERENCES_MODAL_NAME);
 };
 
+/**
+ * Hide additional info modal
+ */
+export const hideAdditionalInfo = () => {
+    const state = globalObj._state;
+
+    if (!state._additionalInfoModalVisible)
+        return;
+
+    state._additionalInfoModalVisible = false;
+
+    discardUnsavedPreferences();
+
+    /**
+     * Fix focus restoration to body with Chrome
+     */
+    focus(globalObj._dom._pmFocusSpan, true);
+
+    removeClass(globalObj._dom._htmlDom, TOGGLE_ADDITIONAL_INFO_MODAL_CLASS);
+    setAttribute(globalObj._dom._pm, ARIA_HIDDEN, 'true');
+
+    /**
+     * If consent modal is visible, focus him (instead of page document)
+     */
+    if (state._consentModalVisible) {
+        focus(state._lastFocusedModalElement);
+        state._lastFocusedModalElement = null;
+    } else {
+        /**
+         * Restore focus to last page element which had focus before modal opening
+         */
+        focus(state._lastFocusedElemBeforeModal);
+        state._lastFocusedElemBeforeModal = null;
+    }
+
+    debug('CookieConsent [TOGGLE]: hide preferencesModal');
+
+    fireEvent(globalObj._customEvents._onModalHide, ADDITIONAL_INFO_MODAL_NAME);
+};
+
 var miniAPI = {
     show,
     hide,
     showPreferences,
+    showAdditionalInformation,
     hidePreferences,
+    hideAdditionalInfo,
     acceptCategory
 };
 

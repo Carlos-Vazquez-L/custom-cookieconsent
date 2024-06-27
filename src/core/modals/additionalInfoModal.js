@@ -21,7 +21,6 @@ import {
 
 import { guiManager } from '../../utils/gui-manager';
 import {
-    PREFERENCES_MODAL_NAME,
     ADDITIONAL_INFO_MODAL_NAME,
     SCRIPT_TAG_SELECTOR,
     DIV_TAG,
@@ -44,14 +43,14 @@ import {
 export const createAdditionalInfoModal = (api, createMainContainer) => {
     const state = globalObj._state;
     const dom = globalObj._dom;
-    const {hide, hidePreferences, acceptCategory} = api;
+    const {hide, hideAdditionalInfo, acceptCategory} = api;
 
     /**
      * @param {string|string[]} [categories]
      */
     const acceptHelper = (categories) => {
         acceptCategory(categories);
-        hidePreferences();
+        hideAdditionalInfo();
         hide();
     };
 
@@ -85,7 +84,7 @@ export const createAdditionalInfoModal = (api, createMainContainer) => {
         /**
          * Hide modal when overlay is clicked
          */
-        addEvent(pmOverlay, CLICK_EVENT, hidePreferences);
+        addEvent(pmOverlay, CLICK_EVENT, hideAdditionalInfo);
 
         // Preferences modal
         dom._pm = createNode(DIV_TAG);
@@ -99,7 +98,7 @@ export const createAdditionalInfoModal = (api, createMainContainer) => {
         // Hide preferences on 'esc' key press
         addEvent(dom._htmlDom, 'keydown', (event) => {
             if (event.keyCode === 27)
-                hidePreferences();
+                hideAdditionalInfo();
         }, true);
 
         dom._pmHeader = createNode(DIV_TAG);
@@ -112,7 +111,7 @@ export const createAdditionalInfoModal = (api, createMainContainer) => {
         dom._pmCloseBtn = createNode(BUTTON_TAG);
         addClassPm(dom._pmCloseBtn, 'close-btn');
         setAttribute(dom._pmCloseBtn, 'aria-label', modalData.closeIconLabel || '');
-        addEvent(dom._pmCloseBtn, CLICK_EVENT, hidePreferences);
+        addEvent(dom._pmCloseBtn, CLICK_EVENT, hideAdditionalInfo);
 
         dom._pmFocusSpan = createNode('span');
         dom._pmFocusSpan.innerHTML = getSvgIcon();
