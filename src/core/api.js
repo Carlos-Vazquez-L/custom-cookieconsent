@@ -36,6 +36,7 @@ import {
 import {
     createConsentModal,
     createPreferencesModal,
+    createAdditionalInfoModal,
     generateHtml,
     createMainContainer
 } from './modals/index';
@@ -68,7 +69,8 @@ import {
     OPT_OUT_MODE,
     CONSENT_MODAL_NAME,
     ARIA_HIDDEN,
-    PREFERENCES_MODAL_NAME
+    PREFERENCES_MODAL_NAME,
+    ADDITIONAL_INFO_MODAL_NAME
 } from '../utils/constants';
 import { localStorageManager } from '../utils/localstorage';
 
@@ -289,6 +291,44 @@ export const showPreferences = () => {
 };
 
 /**
+ * Show additional information modal
+ */
+export const showAdditionalInformation = () => {
+    const state = globalObj._state;
+
+    if (state._additionalInfoModalVisible)
+        return;
+
+    if (!state._additionalInfoModalExists)
+        createAdditionalInfoModal(miniAPI, createMainContainer);
+
+    state._additionalInfoModalVisible = true;
+
+    // If there is no consent-modal, keep track of the last focused elem.
+    if (!state._consentModalVisible) {
+        state._lastFocusedElemBeforeModal = getActiveElement();
+    } else {
+        state._lastFocusedModalElement = getActiveElement();
+    }
+
+    focusAfterTransition(globalObj._dom._pm, 2);
+
+    addClass(globalObj._dom._htmlDom, TOGGLE_PREFERENCES_MODAL_CLASS);
+    setAttribute(globalObj._dom._pm, ARIA_HIDDEN, 'false');
+
+    /**
+     * Set focus to additionalInfo Modal
+     */
+    setTimeout(() => {
+        focus(globalObj._dom._pmDivTabindex);
+    }, 100);
+
+    debug('CookieConsent [TOGGLE]: show additionalInfoModal');
+
+    fireEvent(globalObj._customEvents._onModalShow, ADDITIONAL_INFO_MODAL_NAME);
+};
+
+/**
  * https://github.com/orestbida/cookieconsent/issues/481
  */
 const discardUnsavedPreferences = () => {
@@ -396,6 +436,9 @@ export const setLanguage = async (newLanguageCode, forceUpdate) => {
 
         if (state._preferencesModalExists)
             createPreferencesModal(miniAPI, createMainContainer);
+
+        if (state._additionalInfoModalExists)
+            createAdditionalInfoModal(miniAPI, createMainContainer);
 
         handleRtlLanguage();
 

@@ -2,6 +2,7 @@ import { globalObj } from '../global';
 import { createNode, isString, addDataButtonListeners } from '../../utils/general';
 import { createConsentModal } from './consentModal';
 import { createPreferencesModal } from './preferencesModal';
+import { createAdditionalInfoModal } from './additionalInfoModal';
 import { DIV_TAG } from '../../utils/constants';
 import { handleRtlLanguage } from '../../utils/language';
 
@@ -34,9 +35,13 @@ export const generateHtml = (api) => {
     if (globalObj._state._invalidConsent)
         createConsentModal(api, createMainContainer);
 
-    if (!globalObj._config.lazyHtmlGeneration)
+    if (!globalObj._config.lazyHtmlGeneration){
         createPreferencesModal(api, createMainContainer);
+        createAdditionalInfoModal(api, createMainContainer);
+    }
+        
 };
 
 export * from './consentModal';
 export * from './preferencesModal';
+export * from './additionalInfoModal';

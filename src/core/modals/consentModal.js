@@ -27,6 +27,7 @@ import {
 
 import { guiManager } from '../../utils/gui-manager';
 import { createPreferencesModal } from './preferencesModal';
+import { createAdditionalInfoModal } from './additionalInfoModal';
 
 /**
  * @callback CreateMainContainer
@@ -234,8 +235,8 @@ export const createConsentModal = (api, createMainContainer) => {
 
             // Now we are using the same function as for the showPreferences button
             addEvent(dom._cmAdditionalInfoBtn, 'mouseenter', () => {
-                if (!state._preferencesModalExists)
-                    createPreferencesModal(api, createMainContainer);
+                if (!state._additionalInfoModalExists)
+                    createAdditionalInfoModal(api, createMainContainer);
             });
             addEvent(dom._cmAdditionalInfoBtn, CLICK_EVENT, showPreferences);
         }

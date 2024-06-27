@@ -19,3 +19,4 @@ export const DATA_ROLE = 'data-role';
 
 export const CONSENT_MODAL_NAME = 'consentModal';
 export const PREFERENCES_MODAL_NAME = 'preferencesModal';
+export const ADDITIONAL_INFO_MODAL_NAME = 'additionalInfoModal';
