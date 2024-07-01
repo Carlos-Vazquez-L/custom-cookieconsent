@@ -53,7 +53,7 @@ const createFocusSpan = () => {
 export const createConsentModal = (api, createMainContainer) => {
     const state = globalObj._state;
     const dom = globalObj._dom;
-    const {hide, showPreferences, acceptCategory} = api;
+    const {hide, showPreferences, showAdditionalInfo, acceptCategory} = api;
 
     /**
      * @type {import("../global").ConsentModalOptions}
@@ -233,12 +233,11 @@ export const createConsentModal = (api, createMainContainer) => {
             addClassCm(dom._cmAdditionalInfoBtn, 'btn--secondary');
             setAttribute(dom._cmAdditionalInfoBtn, DATA_ROLE, 'show');
 
-            // Now we are using the same function as for the showPreferences button
             addEvent(dom._cmAdditionalInfoBtn, 'mouseenter', () => {
                 if (!state._additionalInfoModalExists)
                     createAdditionalInfoModal(api, createMainContainer);
             });
-            addEvent(dom._cmAdditionalInfoBtn, CLICK_EVENT, showPreferences);
+            addEvent(dom._cmAdditionalInfoBtn, CLICK_EVENT, showAdditionalInfo);
         }
 
         dom._cmAdditionalInfoBtn.firstElementChild.innerHTML = additionalInfoBtnData;
