@@ -232,7 +232,7 @@ export const createConsentModal = (api, createMainContainer) => {
             addClassCm(dom._cmAdditionalInfoBtn, 'btn');
             addClassCm(dom._cmAdditionalInfoBtn, 'btn--secondary');
             addClassCm(dom._cmAdditionalInfoBtn, 'btn--additional-info');
-            setAttribute(dom._cmAdditionalInfoBtn, DATA_ROLE, 'show');
+            setAttribute(dom._cmAdditionalInfoBtn, DATA_ROLE, 'show-additional-info');
             setAttribute(dom._cmAdditionalInfoBtn, 'data-cc', 'show-additionalInfoModal');
 
             addEvent(dom._cmAdditionalInfoBtn, 'mouseenter', () => {
