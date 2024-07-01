@@ -616,15 +616,18 @@ export const setAcceptedCategories = (acceptedCategories) => {
  * @param {HTMLElement} [elem]
  * @param {import('../core/global').Api} api
  * @param {createModal} [createPreferencesModal]
+ * @param {createModal} [createAdditionalInfoModal]
  */
-export const addDataButtonListeners = (elem, api, createPreferencesModal, createMainContainer) => {
+export const addDataButtonListeners = (elem, api, createPreferencesModal, createAdditionalInfoModal, createMainContainer) => {
     const ACCEPT_PREFIX = 'accept-';
 
     const {
         show,
         showPreferences,
+        showAdditionalInfo,
         hide,
         hidePreferences,
+        hideAdditionalInfo,
         acceptCategory
     } = api;
 
@@ -640,16 +643,19 @@ export const addDataButtonListeners = (elem, api, createPreferencesModal, create
         preventDefault(event);
         acceptCategory(acceptType);
         hidePreferences();
+        hideAdditionalInfo();
         hide();
     };
 
     const
         showPreferencesModalElements = getElements('show-preferencesModal'),
         showConsentModalElements = getElements('show-consentModal'),
+        showAdditionalInfoModalElements = getElements('show-additionalInfoModal'),
         acceptAllElements = getElements(ACCEPT_PREFIX + 'all'),
         acceptNecessaryElements = getElements(ACCEPT_PREFIX + 'necessary'),
         acceptCustomElements = getElements(ACCEPT_PREFIX + 'custom'),
-        createPreferencesModalOnHover = globalObj._config.lazyHtmlGeneration;
+        createPreferencesModalOnHover = globalObj._config.lazyHtmlGeneration,
+        createAdditionalInfoModalOnHover = globalObj._config.lazyHtmlGeneration;
 
     //{{START: GUI}}
     for (const el of showPreferencesModalElements) {
@@ -669,6 +675,27 @@ export const addDataButtonListeners = (elem, api, createPreferencesModal, create
             addEvent(el, 'focus', () => {
                 if (!globalObj._state._preferencesModalExists)
                     createPreferencesModal(api, createMainContainer);
+            });
+        }
+    }
+
+    for (const el of showAdditionalInfoModalElements) {
+        setAttribute(el, 'aria-haspopup', 'dialog');
+        addEvent(el, CLICK_EVENT, (event) => {
+            preventDefault(event);
+            showAdditionalInfo();
+        });
+
+        if (createAdditionalInfoModalOnHover) {
+            addEvent(el, 'mouseenter', (event) => {
+                preventDefault(event);
+                if (!globalObj._state._additionalInfoModalExists)
+                    createAdditionalInfoModal(api, createMainContainer);
+            }, true);
+
+            addEvent(el, 'focus', () => {
+                if (!globalObj._state._additionalInfoModalExists)
+                    createAdditionalInfoModal(api, createMainContainer);
             });
         }
     }
@@ -730,7 +757,8 @@ export const focus = (el, toggleTabIndex) => {
 export const focusAfterTransition = (element, modalId) => {
     const getVisibleDiv = (modalId) => modalId === 1
         ? globalObj._dom._cmDivTabindex
-        : globalObj._dom._pmDivTabindex;
+        : modalId === 2 ? globalObj._dom._pmDivTabindex
+            : globalObj._dom._aimDivTabindex;
 
     const setFocus = (event) => {
         event.target.removeEventListener('transitionend', setFocus);
@@ -810,6 +838,8 @@ export const handleFocusTrap = (modal) => {
      */
     const trapFocus = (modal) => {
         const isConsentModal = modal === dom._cm;
+        const isPreferencesModal = modal === dom._pm;
+        const isAdditionalInfoModal = modal === dom._aim;
 
         const scope = state._userConfig.disablePageInteraction
             ? dom._htmlDom
@@ -819,11 +849,13 @@ export const handleFocusTrap = (modal) => {
 
         const getFocusableElements = () => isConsentModal
             ? state._cmFocusableElements
-            : state._pmFocusableElements;
+            : isPreferencesModal ? state._pmFocusableElements
+                : state._aimFocusableElements;
 
         const isModalVisible = () => isConsentModal
-            ? state._consentModalVisible && !state._preferencesModalVisible
-            : state._preferencesModalVisible;
+            ? state._consentModalVisible && !state._preferencesModalVisible 
+            : isPreferencesModal ? state._preferencesModalVisible
+                : state._additionalInfoModalVisible;
 
         addEvent(scope, 'keydown', (e) => {
             if (e.key !== 'Tab' || !isModalVisible())
@@ -885,7 +917,8 @@ export const getModalFocusableData = (modalId) => {
          * Save first and last elements (trap focus inside modal)
          */
         array[0] = focusableElements[0];
-        array[1] = focusableElements[focusableElements.length - 1];
+        array[1] = focusableElements[focusableElements.length - 2];
+        array[2] = focusableElements[focusableElements.length - 1];
     };
 
     if (modalId === 1 && _state._consentModalExists)
@@ -893,6 +926,9 @@ export const getModalFocusableData = (modalId) => {
 
     if (modalId === 2 && _state._preferencesModalExists)
         saveAllFocusableElements(_dom._pm, _state._pmFocusableElements);
+    
+    if (modalId === 3 && _state._additionalInfoModalExists)
+        saveAllFocusableElements(_dom._aim, _state._aimFocusableElements);
 };
 
 /**

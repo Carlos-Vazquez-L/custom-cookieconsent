@@ -30,7 +30,7 @@ export const createMainContainer = () => {
  * @param {import('../global').Api} api
  */
 export const generateHtml = (api) => {
-    addDataButtonListeners(null, api, createPreferencesModal, createMainContainer);
+    addDataButtonListeners(null, api, createPreferencesModal, createAdditionalInfoModal, createMainContainer);
 
     if (globalObj._state._invalidConsent)
         createConsentModal(api, createMainContainer);

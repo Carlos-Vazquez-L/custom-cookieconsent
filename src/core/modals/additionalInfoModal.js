@@ -73,13 +73,13 @@ export const createAdditionalInfoModal = (api, createMainContainer) => {
             || acceptNecessaryBtnData
             || savePreferencesBtnData;
 
-    if (!dom._pmContainer) {
-        dom._pmContainer = createNode(DIV_TAG);
-        addClass(dom._pmContainer, 'pm-wrapper');
+    if (!dom._aimContainer) {
+        dom._aimContainer = createNode(DIV_TAG);
+        addClass(dom._aimContainer, 'pm-wrapper');
 
         const pmOverlay = createNode('div');
         addClass(pmOverlay, 'pm-overlay');
-        appendChild(dom._pmContainer, pmOverlay);
+        appendChild(dom._aimContainer, pmOverlay);
 
         /**
          * Hide modal when overlay is clicked
@@ -87,13 +87,13 @@ export const createAdditionalInfoModal = (api, createMainContainer) => {
         addEvent(pmOverlay, CLICK_EVENT, hideAdditionalInfo);
 
         // Additional Info modal
-        dom._pm = createNode(DIV_TAG);
+        dom._aim = createNode(DIV_TAG);
 
-        addClass(dom._pm, 'pm');
-        setAttribute(dom._pm, 'role', 'dialog');
-        setAttribute(dom._pm, ARIA_HIDDEN, true);
-        setAttribute(dom._pm, 'aria-modal', true);
-        setAttribute(dom._pm, 'aria-labelledby', 'pm__title');
+        addClass(dom._aim, 'pm');
+        setAttribute(dom._aim, 'role', 'dialog');
+        setAttribute(dom._aim, ARIA_HIDDEN, true);
+        setAttribute(dom._aim, 'aria-modal', true);
+        setAttribute(dom._aim, 'aria-labelledby', 'pm__title');
 
         // Hide additional info on 'esc' key press
         addEvent(dom._htmlDom, 'keydown', (event) => {
@@ -101,60 +101,60 @@ export const createAdditionalInfoModal = (api, createMainContainer) => {
                 hideAdditionalInfo();
         }, true);
 
-        dom._pmHeader = createNode(DIV_TAG);
-        addClassPm(dom._pmHeader, 'header');
+        dom._aimHeader = createNode(DIV_TAG);
+        addClassPm(dom._aimHeader, 'header');
 
-        dom._pmTitle = createNode('h2');
-        addClassPm(dom._pmTitle, 'title');
-        dom._pmTitle.id = 'pm__title';
+        dom._aimTitle = createNode('h2');
+        addClassPm(dom._aimTitle, 'title');
+        dom._aimTitle.id = 'pm__title';
 
-        dom._pmCloseBtn = createNode(BUTTON_TAG);
-        addClassPm(dom._pmCloseBtn, 'close-btn');
-        setAttribute(dom._pmCloseBtn, 'aria-label', modalData.closeIconLabel || '');
-        addEvent(dom._pmCloseBtn, CLICK_EVENT, hideAdditionalInfo);
+        dom._aimCloseBtn = createNode(BUTTON_TAG);
+        addClassPm(dom._aimCloseBtn, 'close-btn');
+        setAttribute(dom._aimCloseBtn, 'aria-label', modalData.closeIconLabel || '');
+        addEvent(dom._aimCloseBtn, CLICK_EVENT, hideAdditionalInfo);
 
-        dom._pmFocusSpan = createNode('span');
-        dom._pmFocusSpan.innerHTML = getSvgIcon();
-        appendChild(dom._pmCloseBtn, dom._pmFocusSpan);
+        dom._aimFocusSpan = createNode('span');
+        dom._aimFocusSpan.innerHTML = getSvgIcon();
+        appendChild(dom._aimCloseBtn, dom._aimFocusSpan);
 
-        dom._pmBody = createNode(DIV_TAG);
-        addClassPm(dom._pmBody, 'body');
+        dom._aimBody = createNode(DIV_TAG);
+        addClassPm(dom._aimBody, 'body');
 
-        dom._pmFooter = createNode(DIV_TAG);
-        addClassPm(dom._pmFooter, 'footer');
+        dom._aimFooter = createNode(DIV_TAG);
+        addClassPm(dom._aimFooter, 'footer');
 
-        var _pmBtnContainer = createNode(DIV_TAG);
-        addClass(_pmBtnContainer, 'btns');
+        var _aimBtnContainer = createNode(DIV_TAG);
+        addClass(_aimBtnContainer, 'btns');
 
-        var _pmBtnGroup1 = createNode(DIV_TAG);
-        var _pmBtnGroup2 = createNode(DIV_TAG);
-        addClassPm(_pmBtnGroup1, BTN_GROUP_CLASS);
-        addClassPm(_pmBtnGroup2, BTN_GROUP_CLASS);
+        var _aimBtnGroup1 = createNode(DIV_TAG);
+        var _aimBtnGroup2 = createNode(DIV_TAG);
+        addClassPm(_aimBtnGroup1, BTN_GROUP_CLASS);
+        addClassPm(_aimBtnGroup2, BTN_GROUP_CLASS);
 
-        appendChild(dom._pmFooter, _pmBtnGroup1);
-        appendChild(dom._pmFooter, _pmBtnGroup2);
+        appendChild(dom._aimFooter, _aimBtnGroup1);
+        appendChild(dom._aimFooter, _aimBtnGroup2);
 
-        appendChild(dom._pmHeader, dom._pmTitle);
-        appendChild(dom._pmHeader, dom._pmCloseBtn);
+        appendChild(dom._aimHeader, dom._aimTitle);
+        appendChild(dom._aimHeader, dom._aimCloseBtn);
 
-        dom._pmDivTabindex = createNode(DIV_TAG);
-        setAttribute(dom._pmDivTabindex, 'tabIndex', -1);
-        appendChild(dom._pm, dom._pmDivTabindex);
+        dom._aimDivTabindex = createNode(DIV_TAG);
+        setAttribute(dom._aimDivTabindex, 'tabIndex', -1);
+        appendChild(dom._aim, dom._aimDivTabindex);
 
-        appendChild(dom._pm, dom._pmHeader);
-        appendChild(dom._pm, dom._pmBody);
+        appendChild(dom._aim, dom._aimHeader);
+        appendChild(dom._aim, dom._aimBody);
 
-        // createFooter && appendChild(dom._pm, dom._pmFooter);
+        createFooter && appendChild(dom._aim, dom._aimFooter);
 
-        appendChild(dom._pmContainer, dom._pm);
+        appendChild(dom._aimContainer, dom._aim);
     } else {
-        dom._pmNewBody = createNode(DIV_TAG);
-        addClassPm(dom._pmNewBody, 'body');
+        dom._aimNewBody = createNode(DIV_TAG);
+        addClassPm(dom._aimNewBody, 'body');
     }
 
     if (titleData) {
-        dom._pmTitle.innerHTML = titleData;
-        closeIconLabelData && setAttribute(dom._pmCloseBtn, 'aria-label', closeIconLabelData);
+        dom._aimTitle.innerHTML = titleData;
+        closeIconLabelData && setAttribute(dom._aimCloseBtn, 'aria-label', closeIconLabelData);
     }
 
     let sectionToggleContainer;
@@ -404,7 +404,7 @@ export const createAdditionalInfoModal = (api, createMainContainer) => {
         if (sIsExpandableToggle || sDescriptionData)
             appendChild(s, sDescContainer);
 
-        const currentBody = dom._pmNewBody || dom._pmBody;
+        const currentBody = dom._aimNewBody || dom._aimBody;
 
         if (hasToggle) {
             if (!sectionToggleContainer) {
@@ -421,70 +421,70 @@ export const createAdditionalInfoModal = (api, createMainContainer) => {
     });
 
     if (acceptAllBtnData && acceptAllBtnData !== '') {
-        if (!dom._pmAcceptAllBtn) {
-            dom._pmAcceptAllBtn = createNode(BUTTON_TAG);
-            addClassPm(dom._pmAcceptAllBtn, 'btn');
-            setAttribute(dom._pmAcceptAllBtn, DATA_ROLE, 'all');
-            appendChild(_pmBtnGroup1, dom._pmAcceptAllBtn);
-            addEvent(dom._pmAcceptAllBtn, CLICK_EVENT, () =>
+        if (!dom._aimAcceptAllBtn) {
+            dom._aimAcceptAllBtn = createNode(BUTTON_TAG);
+            addClassPm(dom._aimAcceptAllBtn, 'btn');
+            setAttribute(dom._aimAcceptAllBtn, DATA_ROLE, 'all');
+            appendChild(_aimBtnGroup1, dom._aimAcceptAllBtn);
+            addEvent(dom._aimAcceptAllBtn, CLICK_EVENT, () =>
                 acceptHelper('all')
             );
         }
 
-        dom._pmAcceptAllBtn.innerHTML = acceptAllBtnData;
+        dom._aimAcceptAllBtn.innerHTML = acceptAllBtnData;
     }
 
     if (acceptNecessaryBtnData && acceptNecessaryBtnData !== '') {
-        if (!dom._pmAcceptNecessaryBtn) {
-            dom._pmAcceptNecessaryBtn = createNode(BUTTON_TAG);
-            addClassPm(dom._pmAcceptNecessaryBtn, 'btn');
-            setAttribute(dom._pmAcceptNecessaryBtn, DATA_ROLE, 'necessary');
-            appendChild(_pmBtnGroup1, dom._pmAcceptNecessaryBtn);
-            addEvent(dom._pmAcceptNecessaryBtn, CLICK_EVENT, () =>
+        if (!dom._aimAcceptNecessaryBtn) {
+            dom._aimAcceptNecessaryBtn = createNode(BUTTON_TAG);
+            addClassPm(dom._aimAcceptNecessaryBtn, 'btn');
+            setAttribute(dom._aimAcceptNecessaryBtn, DATA_ROLE, 'necessary');
+            appendChild(_aimBtnGroup1, dom._aimAcceptNecessaryBtn);
+            addEvent(dom._aimAcceptNecessaryBtn, CLICK_EVENT, () =>
                 acceptHelper([])
             );
         }
 
-        dom._pmAcceptNecessaryBtn.innerHTML = acceptNecessaryBtnData;
+        dom._aimAcceptNecessaryBtn.innerHTML = acceptNecessaryBtnData;
     }
 
     if (savePreferencesBtnData && savePreferencesBtnData !== '') {
-        if (!dom._pmSavePreferencesBtn) {
-            dom._pmSavePreferencesBtn = createNode(BUTTON_TAG);
-            addClassPm(dom._pmSavePreferencesBtn, 'btn');
-            addClassPm(dom._pmSavePreferencesBtn, 'btn--secondary');
-            setAttribute(dom._pmSavePreferencesBtn, DATA_ROLE, 'save');
-            appendChild(_pmBtnGroup2, dom._pmSavePreferencesBtn);
+        if (!dom._aimSavePreferencesBtn) {
+            dom._aimSavePreferencesBtn = createNode(BUTTON_TAG);
+            addClassPm(dom._aimSavePreferencesBtn, 'btn');
+            addClassPm(dom._aimSavePreferencesBtn, 'btn--secondary');
+            setAttribute(dom._aimSavePreferencesBtn, DATA_ROLE, 'save');
+            appendChild(_aimBtnGroup2, dom._aimSavePreferencesBtn);
 
-            addEvent(dom._pmSavePreferencesBtn, CLICK_EVENT, () =>
+            addEvent(dom._aimSavePreferencesBtn, CLICK_EVENT, () =>
                 acceptHelper()
             );
         }
 
-        dom._pmSavePreferencesBtn.innerHTML = savePreferencesBtnData;
+        dom._aimSavePreferencesBtn.innerHTML = savePreferencesBtnData;
     }
 
-    if (dom._pmNewBody) {
-        dom._pm.replaceChild(dom._pmNewBody, dom._pmBody);
-        dom._pmBody = dom._pmNewBody;
+    if (dom._aimNewBody) {
+        dom._aim.replaceChild(dom._aimNewBody, dom._aimBody);
+        dom._aimBody = dom._aimNewBody;
     }
 
     guiManager(1);
 
-    if (!state._preferencesModalExists) {
-        state._preferencesModalExists = true;
+    if (!state._additionalInfoModalExists) {
+        state._additionalInfoModalExists = true;
 
         debug('CookieConsent [HTML] created', ADDITIONAL_INFO_MODAL_NAME);
 
-        fireEvent(globalObj._customEvents._onModalReady, ADDITIONAL_INFO_MODAL_NAME, dom._pm);
+        fireEvent(globalObj._customEvents._onModalReady, ADDITIONAL_INFO_MODAL_NAME, dom._aim);
         createMainContainer(api);
-        appendChild(dom._ccMain, dom._pmContainer);
-        handleFocusTrap(dom._pm);
+        appendChild(dom._ccMain, dom._aimContainer);
+        handleFocusTrap(dom._aim);
 
         /**
          * Enable transition
          */
-        setTimeout(() => addClass(dom._pmContainer, 'cc--anim'), 100);
+        setTimeout(() => addClass(dom._aimContainer, 'cc--anim'), 100);
     }
 
     getModalFocusableData(2);
