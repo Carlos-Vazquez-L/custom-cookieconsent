@@ -633,7 +633,6 @@ export const addDataButtonListeners = (elem, api, createPreferencesModal, create
 
     const rootEl = elem || document;
     const getElements = dataRole => querySelectorAll(rootEl, `[data-cc="${dataRole}"]`);
-    const getELementsByClass = className => querySelectorAll(rootEl, `.${className}`);
 
     /**
      * Helper function: accept and then hide modals
@@ -658,8 +657,9 @@ export const addDataButtonListeners = (elem, api, createPreferencesModal, create
         createPreferencesModalOnHover = globalObj._config.lazyHtmlGeneration,
         createAdditionalInfoModalOnHover = globalObj._config.lazyHtmlGeneration;
 
-    console.log('showPreferencesModalElements', showPreferencesModalElements);
-    console.log('showAdditionalInfoModalElements', showAdditionalInfoModalElements);
+    debug('showPreferencesModalElements', showPreferencesModalElements);
+    debug('showConsentModalElements', showConsentModalElements);
+    debug('showAdditionalInfoModalElements', showAdditionalInfoModalElements);
 
     //{{START: GUI}}
     for (const el of showPreferencesModalElements) {
@@ -685,6 +685,7 @@ export const addDataButtonListeners = (elem, api, createPreferencesModal, create
 
     for (const el of showAdditionalInfoModalElements) {
         setAttribute(el, 'aria-haspopup', 'dialog');
+        debug('showAdditionalInfoModalElements', el);
         addEvent(el, CLICK_EVENT, (event) => {
             preventDefault(event);
             showAdditionalInfo();
