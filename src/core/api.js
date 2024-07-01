@@ -294,7 +294,7 @@ export const showPreferences = () => {
 /**
  * Show additional information modal
  */
-export const showAdditionalInformation = () => {
+export const showAdditionalInfo = () => {
     const state = globalObj._state;
 
     if (state._additionalInfoModalVisible)
@@ -472,7 +472,7 @@ var miniAPI = {
     show,
     hide,
     showPreferences,
-    showAdditionalInformation,
+    showAdditionalInfo,
     hidePreferences,
     hideAdditionalInfo,
     acceptCategory
