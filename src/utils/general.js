@@ -657,6 +657,9 @@ export const addDataButtonListeners = (elem, api, createPreferencesModal, create
         createPreferencesModalOnHover = globalObj._config.lazyHtmlGeneration,
         createAdditionalInfoModalOnHover = globalObj._config.lazyHtmlGeneration;
 
+    console.log('showPreferencesModalElements', showPreferencesModalElements);
+    console.log('showAdditionalInfoModalElements', showAdditionalInfoModalElements);
+
     //{{START: GUI}}
     for (const el of showPreferencesModalElements) {
         setAttribute(el, 'aria-haspopup', 'dialog');
@@ -839,7 +842,6 @@ export const handleFocusTrap = (modal) => {
     const trapFocus = (modal) => {
         const isConsentModal = modal === dom._cm;
         const isPreferencesModal = modal === dom._pm;
-        const isAdditionalInfoModal = modal === dom._aim;
 
         const scope = state._userConfig.disablePageInteraction
             ? dom._htmlDom
