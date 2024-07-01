@@ -231,6 +231,7 @@ export const createConsentModal = (api, createMainContainer) => {
             appendChild(dom._cmAdditionalInfoBtn, createFocusSpan());
             addClassCm(dom._cmAdditionalInfoBtn, 'btn');
             addClassCm(dom._cmAdditionalInfoBtn, 'btn--secondary');
+            addClassCm(dom._cmAdditionalInfoBtn, 'btn--additional-info');
             setAttribute(dom._cmAdditionalInfoBtn, DATA_ROLE, 'show');
 
             addEvent(dom._cmAdditionalInfoBtn, 'mouseenter', () => {

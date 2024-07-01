@@ -831,6 +831,7 @@ export const reset = (deleteCookie) => {
     _htmlDom && _htmlDom.classList.remove(
         TOGGLE_DISABLE_INTERACTION_CLASS,
         TOGGLE_PREFERENCES_MODAL_CLASS,
+        TOGGLE_ADDITIONAL_INFO_MODAL_CLASS,
         TOGGLE_CONSENT_MODAL_CLASS
     );
     //{{END: GUI}}
