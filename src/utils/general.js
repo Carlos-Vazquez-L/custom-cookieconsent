@@ -651,7 +651,7 @@ export const addDataButtonListeners = (elem, api, createPreferencesModal, create
     const
         showPreferencesModalElements = getElements('show-preferencesModal'),
         showConsentModalElements = getElements('show-consentModal'),
-        showAdditionalInfoModalElements = getELementsByClass('btn--additional-info'),
+        showAdditionalInfoModalElements = getELementsByClass('cm__btn--additional-info'),
         acceptAllElements = getElements(ACCEPT_PREFIX + 'all'),
         acceptNecessaryElements = getElements(ACCEPT_PREFIX + 'necessary'),
         acceptCustomElements = getElements(ACCEPT_PREFIX + 'custom'),
